@@ -480,6 +480,12 @@ $(function () {
     }).trigger("resize");
 })(jQuery);
 
-setTimeout(function(){
-    $('#messages').fadeOut('slow');
-}, 4000)
+// setTimeout(function(){
+//     $('#messages').fadeOut('slow');
+// }, 1000)
+
+$(document).ready(function(){
+    setTimeout(function(){
+        $('#messages').fadeOut('slow');
+    }, 4000);
+});
