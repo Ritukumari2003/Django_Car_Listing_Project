@@ -35,6 +35,7 @@ LOGIN_REDIRECT_URL = 'dashboard'
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'cars.apps.CarsConfig',
+    'contacts.apps.ContactsConfig',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -154,3 +155,10 @@ MESSAGE_TAGS = {
 }
 
 SITE_ID = 1
+
+# Email sending
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '2503.ritu@gmail.com'
+EMAIL_HOST_PASSWORD = 'vfmi zqbl qtoe zznc'
+EMAIL_USE_TLS = True
