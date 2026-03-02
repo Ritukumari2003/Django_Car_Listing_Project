@@ -159,6 +159,6 @@ SITE_ID = 1
 # Email sending
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = '2503.ritu@gmail.com'
-EMAIL_HOST_PASSWORD = 'vfmi zqbl qtoe zznc'
+EMAIL_HOST_USER = 'XXXXXXXXXXX'
+EMAIL_HOST_PASSWORD = 'XXXXXXXXXXXXX'
 EMAIL_USE_TLS = True
