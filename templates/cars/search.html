@@ -26,30 +26,66 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="model">
+                                <!-- <select class="selectpicker search-fields" name="model">
                                     <option disabled="disabled" selected="selected">Select Model</option>
                                     {% for model in model_search %}
                                         <option value="{{model}}">{{model}}</option>
                                     {% endfor %}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-                            <div class="form-group">
-                                <select class="selectpicker search-fields" name="city">
-                                    <option disabled="disabled" selected="selected">Select Location</option>
-                                    {% for city in city_search %}
-                                        <option value="{{city}}">{{city}}</option>
+                                </select> -->
+                                <select class="selectpicker search-fields" name="model">
+                                    <option value="" {% if not request.GET.model %}selected{% endif %}>
+                                        Select Model
+                                    </option>
+
+                                    {% for model in model_search %}
+                                        <option value="{{ model }}"
+                                            {% if model == request.GET.model %}selected{% endif %}>
+                                            {{ model }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="year">
+                                <!-- <select class="selectpicker search-fields" name="city">
+                                    <option disabled="disabled" selected="selected">Select Location</option>
+                                    {% for city in city_search %}
+                                        <option value="{{city}}">{{city}}</option>
+                                    {% endfor %}
+                                </select> -->
+                                <select class="selectpicker search-fields" name="city">
+                                    <option value="" {% if not request.GET.city %}selected{% endif %}>
+                                        Select Location
+                                    </option>
+
+                                    {% for city in city_search %}
+                                        <option value="{{ city }}"
+                                            {% if city == request.GET.city %}selected{% endif %}>
+                                            {{ city }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+                            <div class="form-group">
+                                <!-- <select class="selectpicker search-fields" name="year">
                                     <option disabled="disabled" selected="selected">Select Year</option>
                                     {% for year in year_search %}
                                         <option value="{{year}}">{{year}}</option>
+                                    {% endfor %}
+                                </select> -->
+                                <select class="selectpicker search-fields" name="year">
+                                    <option value="" {% if not request.GET.year %}selected{% endif %}>
+                                        Select Year
+                                    </option>
+
+                                    {% for year in year_search %}
+                                        <option value="{{ year }}"
+                                            {% if year|stringformat:"s" == request.GET.year %}selected{% endif %}>
+                                            {{ year }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -58,20 +94,44 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="body_style">
+                                <!-- <select class="selectpicker search-fields" name="body_style">
                                     <option disabled="disabled" selected="selected">Select Type Of Car</option>
                                     {% for body_style in body_style_search %}
                                         <option value="{{body_style}}">{{body_style}}</option>
+                                    {% endfor %}
+                                </select> -->
+                                <select class="selectpicker search-fields" name="body_style">
+                                    <option value="" {% if not request.GET.body_style %}selected{% endif %}>
+                                        Select Type Of Car
+                                    </option>
+
+                                    {% for body_style in body_style_search %}
+                                        <option value="{{ body_style }}"
+                                            {% if body_style == request.GET.body_style %}selected{% endif %}>
+                                            {{ body_style }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
-                                <select class="selectpicker search-fields" name="transmission">
+                                <!-- <select class="selectpicker search-fields" name="transmission">
                                     <option disabled="disabled" selected="selected">Transmission</option>
                                     {% for transmission in transmission_search %}
                                         <option value="{{transmission}}">{{transmission}}</option>
+                                    {% endfor %}
+                                </select> -->
+                                <select class="selectpicker search-fields" name="transmission">
+                                    <option value="" {% if not request.GET.transmission %}selected{% endif %}>
+                                        Transmission
+                                    </option>
+
+                                    {% for transmission in transmission_search %}
+                                        <option value="{{ transmission }}"
+                                            {% if transmission == request.GET.transmission %}selected{% endif %}>
+                                            {{ transmission }}
+                                        </option>
                                     {% endfor %}
                                 </select>
                             </div>
@@ -114,7 +174,7 @@
                         <div class="car-thumbnail">
                         <a href="{% url 'car_detail' car.id %}" class="car-img">
                             <div class="tag">For Sale</div>
-                            <img class="d-block w-100" src="{{ car.car_photo.url }}" alt="car" style="min-height: 262px; max_height: 262px;" />
+                            <img class="d-block w-100" src="{{ car.car_photo.url }}" alt="car" style="min-height: 262px; max-height: 262px;" />
                             <div class="facilities-list clearfix">
                             <ul>
                                 <li>

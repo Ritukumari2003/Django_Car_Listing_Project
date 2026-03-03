@@ -46,8 +46,10 @@ def search(request):
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
-            # cars = Car.objects.filter(Q(description__icontains=keyword))
-            cars = cars.filter(description__icontains=keyword)
+            cars = cars.filter(
+                            Q(description__icontains=keyword) |
+                            Q(car_title__icontains=keyword)
+                        )
 
     if 'model' in request.GET:
         model = request.GET['model']
@@ -74,6 +76,11 @@ def search(request):
         max_price = request.GET['max_price']
         if max_price:
             cars = cars.filter(price__gte=min_price, price__lte=max_price)
+
+    if 'transmission' in request.GET:
+        transmission = request.GET['transmission']
+        if transmission:
+            cars = cars.filter(transmission__iexact=transmission)
     
     context = {
         'cars': cars,
@@ -82,6 +89,7 @@ def search(request):
         'year_search': year_search,
         'body_style_search': body_style_search,
         'transmission_search': transmission_search,
+        'values': request.GET,
     }
 
     return render(request, 'cars/search.html', context)

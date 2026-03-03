@@ -28,7 +28,7 @@
             {% endif %}
               href="{% url 'home' %}">Home</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a 
             {% if 'cars' in request.path %}
               class="nav-link active"
@@ -36,37 +36,56 @@
               class="nav-link"
             {% endif %}
             href="{% url 'cars' %}"> Cars </a>
+          </li> -->
           <li class="nav-item">
-            <a 
-            {% if 'about' in request.path %}
-              class="nav-link active"
-            {% else %}
-              class="nav-link"
-            {% endif %}
-            href="{% url 'about' %}"> About </a>
+              <a href="{% url 'cars' %}"
+                class="nav-link 
+                {% if request.resolver_match.url_name == 'cars' %}
+                    active
+                {% endif %}">
+                  Cars
+              </a>
           </li>
           <li class="nav-item">
-            <a
-            {% if 'services' in request.path %}
-              class="nav-link active"
-            {% else %}
-              class="nav-link"
-            {% endif %}
-              href="{% url 'services' %}"> Services </a>
+              <a href="{% url 'about' %}"
+                class="nav-link 
+                {% if request.resolver_match.url_name == 'about' %}
+                    active
+                {% endif %}">
+                  About
+              </a>
           </li>
-          <li class="nav-item dropdown">
-            <a
-            {% if 'contact' in request.path %}
-              class="nav-link active"
-            {% else %}
-              class="nav-link"
-            {% endif %}
-              href="{% url 'contact' %}">Contact</a>
+          <li class="nav-item">
+              <a href="{% url 'services' %}"
+                class="nav-link 
+                {% if request.resolver_match.url_name == 'services' %}
+                    active
+                {% endif %}">
+                  Services
+              </a>
           </li>
-          <li class="nav-item dropdown m-hide">
+          <li class="nav-item">
+              <a href="{% url 'contact' %}"
+                class="nav-link 
+                {% if request.resolver_match.url_name == 'contact' %}
+                    active
+                {% endif %}">
+                  Contact
+              </a>
+          </li>
+           <!-- <li class="nav-item dropdown m-hide">
             <a href="#full-page-search" class="nav-link h-icon">
               <i class="fa fa-search"></i>
             </a>
+          </li> -->
+          <li class="nav-item dropdown m-hide">
+              <a href="#full-page-search"
+                class="nav-link h-icon 
+                {% if request.resolver_match.url_name == 'search' %}
+                    active
+                {% endif %}">
+                  <i class="fa fa-search"></i>
+              </a>
           </li>
         </ul>
       </div>
