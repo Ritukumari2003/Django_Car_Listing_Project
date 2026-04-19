@@ -1,21 +1,53 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages,auth
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
+from contacts.models import Contact
 
 # Create your views here.
+# def login(request):
+#     if request.method == 'POST':
+#         username = request.POST['username']
+#         password = request.POST['password']
+
+#         user = auth.authenticate(username=username, password=password)
+#         if user is not None:
+#             auth.login(request, user)
+#             messages.success(request, "You are now logged in..")
+#             return redirect('dashboard')
+#         else:
+#             messages.error(request, "Invalid user credentials")
+#             return redirect('login')
+        
+#     return render(request, 'accounts/login.html')
+
 def login(request):
     if request.method == 'POST':
-        username = request.POST['username']
+        username_or_email = request.POST['username']
         password = request.POST['password']
 
+        # Check if input is email
+        if '@' in username_or_email:
+            try:
+                user_obj = User.objects.get(email=username_or_email)
+                username = user_obj.username
+            except User.DoesNotExist:
+                messages.error(request, "Invalid email or password")
+                return redirect('login')
+        else:
+            username = username_or_email
+
         user = auth.authenticate(username=username, password=password)
+
         if user is not None:
             auth.login(request, user)
-            messages.success(request, "You are now logged in..")
+            messages.success(request, "You are now logged in.")
             return redirect('dashboard')
         else:
-            messages.error(request, "Invalid user credentials")
+            messages.error(request, "Invalid username/email or password")
             return redirect('login')
+
     return render(request, 'accounts/login.html')
 
 def register(request):
@@ -55,5 +87,12 @@ def logout(request):
         return redirect('home')
     return redirect('home')
 
+@login_required(login_url = "login")
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    user_inquiry = Contact.objects.order_by('-created_date').filter(user_id = request.user.id)
+
+    data = {
+        'inquiries': user_inquiry,
+    }    
+
+    return render(request, 'accounts/dashboard.html', data)

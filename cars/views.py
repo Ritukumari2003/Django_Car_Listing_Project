@@ -74,7 +74,7 @@ def search(request):
     if 'min_price' in request.GET:
         min_price = request.GET['min_price']
         max_price = request.GET['max_price']
-        if max_price:
+        if min_price and max_price:
             cars = cars.filter(price__gte=min_price, price__lte=max_price)
 
     if 'transmission' in request.GET:
@@ -92,4 +92,4 @@ def search(request):
         'values': request.GET,
     }
 
-    return render(request, 'cars/search.html', context)
+    return render(request, 'cars/search.html', context) 

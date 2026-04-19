@@ -279,6 +279,10 @@ $(function () {
     $(".range-slider-ui").each(function () {
         var minRangeValue = $(this).attr('data-min');
         var maxRangeValue = $(this).attr('data-max');
+
+        var minValue = parseInt($(this).attr('data-min-value')) || minRangeValue;
+        var maxValue = parseInt($(this).attr('data-max-value')) || maxRangeValue;
+
         var minName = $(this).attr('data-min-name');
         var maxName = $(this).attr('data-max-name');
         var unit = $(this).attr('data-unit');
@@ -293,7 +297,10 @@ $(function () {
             range: true,
             min: minRangeValue,
             max: maxRangeValue,
-            values: [minRangeValue, maxRangeValue],
+            
+            // values: [minRangeValue, maxRangeValue],
+            values: [minValue, maxValue],
+
             slide: function (event, ui) {
                 event = event;
                 var currentMin = parseInt(ui.values[0], 10);

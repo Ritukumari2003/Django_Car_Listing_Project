@@ -33,13 +33,13 @@
                                     {% endfor %}
                                 </select> -->
                                 <select class="selectpicker search-fields" name="model">
-                                    <option value="" {% if not request.GET.model %}selected{% endif %}>
+                                    <option value="" {% if not values.model %}selected{% endif %}>
                                         Select Model
                                     </option>
 
                                     {% for model in model_search %}
                                         <option value="{{ model }}"
-                                            {% if model == request.GET.model %}selected{% endif %}>
+                                            {% if model == values.model %}selected{% endif %}>
                                             {{ model }}
                                         </option>
                                     {% endfor %}
@@ -55,13 +55,13 @@
                                     {% endfor %}
                                 </select> -->
                                 <select class="selectpicker search-fields" name="city">
-                                    <option value="" {% if not request.GET.city %}selected{% endif %}>
+                                    <option value="" {% if not values.city %}selected{% endif %}>
                                         Select Location
                                     </option>
 
                                     {% for city in city_search %}
                                         <option value="{{ city }}"
-                                            {% if city == request.GET.city %}selected{% endif %}>
+                                            {% if city == values.city %}selected{% endif %}>
                                             {{ city }}
                                         </option>
                                     {% endfor %}
@@ -77,13 +77,13 @@
                                     {% endfor %}
                                 </select> -->
                                 <select class="selectpicker search-fields" name="year">
-                                    <option value="" {% if not request.GET.year %}selected{% endif %}>
+                                    <option value="" {% if not values.year %}selected{% endif %}>
                                         Select Year
                                     </option>
 
                                     {% for year in year_search %}
                                         <option value="{{ year }}"
-                                            {% if year|stringformat:"s" == request.GET.year %}selected{% endif %}>
+                                            {% if year|stringformat:"s" == values.year %}selected{% endif %}>
                                             {{ year }}
                                         </option>
                                     {% endfor %}
@@ -101,13 +101,13 @@
                                     {% endfor %}
                                 </select> -->
                                 <select class="selectpicker search-fields" name="body_style">
-                                    <option value="" {% if not request.GET.body_style %}selected{% endif %}>
+                                    <option value="" {% if not values.body_style %}selected{% endif %}>
                                         Select Type Of Car
                                     </option>
 
                                     {% for body_style in body_style_search %}
                                         <option value="{{ body_style }}"
-                                            {% if body_style == request.GET.body_style %}selected{% endif %}>
+                                            {% if body_style == values.body_style %}selected{% endif %}>
                                             {{ body_style }}
                                         </option>
                                     {% endfor %}
@@ -123,13 +123,13 @@
                                     {% endfor %}
                                 </select> -->
                                 <select class="selectpicker search-fields" name="transmission">
-                                    <option value="" {% if not request.GET.transmission %}selected{% endif %}>
+                                    <option value="" {% if not values.transmission %}selected{% endif %}>
                                         Transmission
                                     </option>
 
                                     {% for transmission in transmission_search %}
                                         <option value="{{ transmission }}"
-                                            {% if transmission == request.GET.transmission %}selected{% endif %}>
+                                            {% if transmission == values.transmission %}selected{% endif %}>
                                             {{ transmission }}
                                         </option>
                                     {% endfor %}
@@ -138,8 +138,17 @@
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 col-6">
                             <div class="form-group">
+                                <!-- <input type="hidden" name="min_price" value="{{ request.GET.min_price }}">
+                                <input type="hidden" name="max_price" value="{{ request.GET.max_price }}"> -->
+
                                 <div class="range-slider">
-                                    <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                    <div 
+                                    data-min="0" 
+                                    data-max="150000" 
+                                    data-unit="USD" data-min-name="min_price" data-max-name="max_price" 
+                                    data-min-value="{{ request.GET.min_price|default:0 }}"
+                                    data-max-value="{{ request.GET.max_price|default:150000 }}"
+                                    class="range-slider-ui ui-slider"></div>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>
